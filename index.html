@@ -70,15 +70,25 @@
           <div class="row">
             <div class="col-md-3">
               <label for="land" class="form-label">Land</label>
-            <input type="text" class="form-control" id="land" name="land" placeholder="Kies een land" required>
-            </div>
+              <select class="form-select form-select-md" aria-label=".form-select-md example">
+                <option selected>Kies een land</option>
+                <option value="1">België</option>
+                <option value="2">Nederland</option>
+                <option value="3">Frankrijk</option>
+              </select>
+              </div>
             <div class="col-md-3">
               <label for="provincie" class="form-label">Provincie</label>
-            <input type="text" class="form-control" id="provincie" name="provincie" placeholder="Kies een provincie" required>
-            </div>
+              <select class="form-select form-select-md" aria-label=".form-select-md example">
+                <option selected>Kies een provincie</option>
+                <option value="1">Vlaams-Brabant</option>
+                <option value="2">Antwerpen</option>
+                <option value="3">Limburg</option>
+              </select>
+              </div>
             <div class="col-md-2">
               <label for="postcode" class="form-label">Postcode</label>
-              <input type="text" class="form-control" id="postcode" name="postcode" required>
+              <input type="text" class="form-control" id="postcode" name="postcode">
             </div>
           </div>
         </div>   
@@ -95,14 +105,45 @@
           <div class="row">
             <div class="col-md-4">
               <h4>Hou me op de hoogte</h4>
-
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Inschrijven voor onze nieuwsbrief
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Ik ga akkoord met de algemene voorwaarden.
+                </label>
+              </div>
             </div>
             <div class="col-md-4">
               <h4>Betaling</h4>
-
-
-
-
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Banking app
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Overschrijving
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Visa card
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  PayPal
+                </label>
+              </div>
             </div>
           </div>
         </div>   
