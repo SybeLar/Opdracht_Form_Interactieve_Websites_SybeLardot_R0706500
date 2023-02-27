@@ -3,13 +3,18 @@
 }
 .btn-primary{
   display: flex;
-  margin-top: 20px;
   border-radius: 5px;
   align-self: center;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: 100%;
+  font-weight: bold;
+  padding: 10px
 }
 .form-select-lg{
   margin-top: 0px;
+}
+.input-group{
+  display: flex;
+  flex-wrap: nowrap;
 }
