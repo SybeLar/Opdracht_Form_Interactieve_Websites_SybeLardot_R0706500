@@ -27,7 +27,10 @@
          <input type="text" class="form-control naam" id="name" name="name" placeholder="Uw naam">
         </div>
         <div class="col-md-4" id="alert">
-          <!--Hier komt de alert bij foutieve ingave of juiste ingave-->
+            <label for="alert" >Foutmeldingen</label>
+            <div class="alert alert-danger" role="alert">
+              <p id="foutmeldingenP"></p>
+            </div>
         </div>
       </div>
     </div>
@@ -45,6 +48,7 @@
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email">
         </div>
+        
       </div>
     </div>
 
@@ -59,6 +63,7 @@
           <label for="password2" class="form-label">Herhaal wachtwoord</label>
         <input type="password" class="form-control" id="password2" name="password2">
         </div>
+        
       </div>
     </div>   
         
@@ -117,7 +122,7 @@
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkbox">
+                <input class="form-check-input" type="checkbox" value="" id="voorwaarden">
                 <label class="form-check-label" for="flexCheckDefault">
                   Ik ga akkoord met de algemene voorwaarden.
                 </label>
@@ -166,7 +171,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8">  
-              <button type="submit" class="btn btn-primary">Wave your magic wand</button>
+              <button class="btn btn-primary" id="submitKnop">Wave your magic wand</button>
             </div>
           </div>
         </div>
@@ -176,33 +181,44 @@
   </div>
 
   <script>
-    let foutmelding = []
+    let errors = []
     let juistebetaling = []
     //https://www.w3schools.com/js/js_validation.asp
     function CheckForm(){
 
       let fname = document.forms["myForm"]["fname"].value;
       if (fname == "" || fname == null) {
-        foutmelding.push("Voornaam moet ingevuld zijn!")
+        errors.push("Het veld voornaam is vereist.")
       }
 
       let name = document.forms["myForm"]["name"].value;
       if (name == "" || name == null){
-        foutmelding.push("Naam moet ingevuld zijn!")
+        errors.push("Het veld naam is vereist.")
       }
 
       let username = document.forms["myForm"]["username"].value;
       if (username == "" || username == null){
-        foutmelding.push("Username moet ingevuld zijn!")
+        errors.push("Het veld gebruikersnaam is vereist.")
+      }
+
+      let adres = document.forms["myForm"]["adres"].value;
+      if (adres == "" || adres == null){
+        errors.push("Adres is vereist.")
       }
 
       let land = document.forms["myForm"]["land"];
       if(land.options[land.selectedIndex].value == 0){
-        foutmelding.push("Kies een land!")
+        errors.push("Het veld land is vereist.")
       }
+
       let provincie = document.forms["myForm"]["provincie"];
       if(provincie.options[provincie.selectedIndex].value == 0){
-        foutmelding.push("Kies een provincie!")
+        errors.push("Het veld provincie is vereist.")
+      }
+
+      let voorwaarden = document.forms["myForm"]["voorwaarden"].value;
+      if (voorwaarden.checked === false) {
+        errors.push("Je moet de algemene voorwaarden accepteren.")
       }
 
       let betalingswijze = ""
@@ -218,18 +234,25 @@
         juistebetaling.push("Betalingswijze is " + betalingswijze)
         }
         else{
-          foutmelding.push("Kies een betalingswijze!")
+          errors.push("Kies een betalingswijze!")
         }
       }
-      if(foutmelding.length !== 0){
+      if(errors.length !== 0){
+        let foutmeldingenP = document.querySelector("#foutmeldingenP");
+        
+          for (let i = 0; i < errors.length; i++) {
+              foutmeldingenP.innerHTML += `${errors[i]}\n`;
+          
+        }
         return false;
       }
       return true;
-     
+      
+      
       }
-
-  console.log(foutmelding)
+  console.log(errors)
   console.log(juistebetaling)
+  
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
