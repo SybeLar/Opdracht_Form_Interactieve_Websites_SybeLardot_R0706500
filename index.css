@@ -14,9 +14,10 @@ body{
   font-weight: bold;
   padding: 10px
 }
-.form-select-lg{
-  margin-top: 0px;
-}
 #alert.hide {
   display: none;
+}
+.container-fluid{
+  margin-left: 10%;
+  margin-top: 15px;
 }

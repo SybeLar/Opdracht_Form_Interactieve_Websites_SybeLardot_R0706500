@@ -240,7 +240,10 @@
       if(betalingswijze != ""){
         juistebetaling.push("Betalingswijze is " + betalingswijze)
         document.querySelector("#betalingswijzeP").innerHTML = "Betalingswijze is " + betalingswijze
-        document.getElementById('betalingalertid').style.display = "block"
+        if (errors.length === 0) {
+          document.getElementById('betalingalertid').style.display = "block"
+        }
+        
         }
         else{
           errors.push("Kies een betalingswijze!")
@@ -256,6 +259,9 @@
                 if(email.value.charAt(0) == '.' || email.value.charAt(0) == '-' || email.value.substring(email.value.indexOf('@') +1, email.value.indexOf('@') +2) == '.' || email.value.substring(email.value.indexOf('@') +1, email.value.indexOf('@') +2) == '-')
                 {   
                   errors.push("E-mail adres is niet correct")
+                }
+                else{
+                  return true
                 }
                 
             }
