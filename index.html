@@ -13,7 +13,7 @@
   
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-6">
         <h1>Registreer</h1>
         <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
         <!--Formulier-->
@@ -153,7 +153,7 @@
       </div>
       <!--Meldingen-->
       <div class="col-lg-4">
-        <div class="col-md-8" id="alert">
+        <div class="col-md-6" id="alert">
           <div class="alert alert-danger" role="alert" id="fouteldingid">
            <h4 id = "foutmeldingenH4"></h4>
             <p id="foutmeldingenP"></p>
@@ -172,7 +172,8 @@
     document.getElementById('betalingalertid').style.display = "none"
     let errors = []
     let juistebetaling = []
-    
+    let postcode = document.querySelector("#postcode")
+    let email = document.querySelector("#email")
     function CheckForm(){
       //foutmeldingen leegmaken
       let foutmeldingenP = document.querySelector("#foutmeldingenP")
@@ -195,6 +196,8 @@
       checkEmptyField(passwoord, "Het wachtwoord is niet ingevuld")
       checkEmptyField(passwoord2, "Herhaal wachtwoord is niet ingevuld")
       validatePayment()
+      checkPC(postcode)
+      validateEmail(email)
 //wachtwoord controle
       if (passwoord.value.length < 7 && passwoord.value !== "")
       {
@@ -244,9 +247,31 @@
         }
       }
   //Email controleren
-      function validateEmail()
-      {
-        let email = document.querySelector("#email");
+  let validRegex = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-.]+(?:\.[a-zA-Z0-9-]+)*$/;
+  //https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
+  function validateEmail(email)
+        {
+            if(email.value.match(validRegex)){
+                //https://www.freecodecamp.org/news/how-to-capitalize-the-first-letter-of-a-string-in-javascript/#:~:text=1.-,Get%20the%20First%20Letter%20of%20the%20String,first%20character%20of%20the%20string.&text=NOTE%3A%20charAt%20is%20preferable%20than,in%20case%20of%20%27%27%5B0%5D%20.
+                if(email.value.charAt(0) == '.' || email.value.charAt(0) == '-' || email.value.substring(email.value.indexOf('@') +1, email.value.indexOf('@') +2) == '.' || email.value.substring(email.value.indexOf('@') +1, email.value.indexOf('@') +2) == '-')
+                {   
+                  errors.push("E-mail adres is niet correct")
+                }
+                
+            }
+            else 
+            {
+                errors.push("E-mail adres is niet correct")
+            }
+        }
+  //Postcode controleren
+      function checkPC(postcode){
+        if (postcode.value == "") {
+          errors.push("Het veld postcode is vereist.")
+        }
+        else if(postcode.value > 10000 || postcode.value < 1000){
+          errors.push("Postcode is niet geldig. (1000-9999)")
+        }
       }
   //Lege velden controleren
       function checkEmptyField(veld, melding)
@@ -256,7 +281,7 @@
                 errors.push(melding)
             }
         }
-        
+  
   console.log(errors)
   console.log(juistebetaling)
   
