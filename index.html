@@ -14,7 +14,7 @@
     <h1>Registreer</h1>
     <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
   </div>
-
+  
     <form name="myForm" action="index.php" onsubmit="return CheckForm()" method="post">
     <div class="container">
       <div class="row">
@@ -27,8 +27,8 @@
          <input type="text" class="form-control naam" id="name" name="name" placeholder="Uw naam">
         </div>
         <div class="col-md-4" id="alert">
-            <label for="alert" >Foutmeldingen</label>
             <div class="alert alert-danger" role="alert">
+              <h4 id = "foutmeldingenH4"></h4>
               <p id="foutmeldingenP"></p>
             </div>
         </div>
@@ -181,46 +181,49 @@
   </div>
 
   <script>
+    document.getElementById('alert').style.display = "none"
     let errors = []
     let juistebetaling = []
-    //https://www.w3schools.com/js/js_validation.asp
+    
     function CheckForm(){
+      //foutmeldingen leegmaken
+      let foutmeldingenP = document.querySelector("#foutmeldingenP")
+      let foutmeldingenH4 = document.querySelector("#foutmeldingenH4")
+      //foutmeldingenP.innerHTML = ""
 
-      let fname = document.forms["myForm"]["fname"].value;
-      if (fname == "" || fname == null) {
-        errors.push("Het veld voornaam is vereist.")
+      //Controle of alles is ingevuld
+      let fname = document.querySelector("#fname")
+      let name = document.querySelector("#name")
+      let username = document.querySelector("#username")
+      let land = document.querySelector("#land")
+      let provincie = document.querySelector("#provincie")
+      let passwoord = document.querySelector("#password")
+      let passwoord2 = document.querySelector("#password2")
+      checkEmptyField(fname, "Het veld voornaam is vereist.")
+      checkEmptyField(name, "Het veld naam is vereist.")
+      checkEmptyField(username, "Het veld gebruikersnaam is vereist.")
+      checkEmptyField(adres, "Het veld Adres is vereist.")
+      checkEmptyField(land, "Het veld land is vereist.")
+      checkEmptyField(provincie, "Het veld provincie is vereist.")
+      checkEmptyField(passwoord, "Het wachtwoord is niet ingevuld")
+      checkEmptyField(passwoord2, "Herhaal wachtwoord is niet ingevuld")
+
+//wachtwoord controle
+      if (passwoord.value.length < 7)
+      {
+        errors.push("Het wachtwoord is niet lang genoeg.")
       }
 
-      let name = document.forms["myForm"]["name"].value;
-      if (name == "" || name == null){
-        errors.push("Het veld naam is vereist.")
+      if (passwoord.value != passwoord2.value) 
+      {
+        errors.push("Wachtwoorden komen niet overeen")
       }
-
-      let username = document.forms["myForm"]["username"].value;
-      if (username == "" || username == null){
-        errors.push("Het veld gebruikersnaam is vereist.")
-      }
-
-      let adres = document.forms["myForm"]["adres"].value;
-      if (adres == "" || adres == null){
-        errors.push("Adres is vereist.")
-      }
-
-      let land = document.forms["myForm"]["land"];
-      if(land.options[land.selectedIndex].value == 0){
-        errors.push("Het veld land is vereist.")
-      }
-
-      let provincie = document.forms["myForm"]["provincie"];
-      if(provincie.options[provincie.selectedIndex].value == 0){
-        errors.push("Het veld provincie is vereist.")
-      }
-
-      let voorwaarden = document.forms["myForm"]["voorwaarden"].value;
+//Algemene voorwaarden controleren
+      let voorwaarden = document.querySelector("#voorwaarden")
       if (voorwaarden.checked === false) {
         errors.push("Je moet de algemene voorwaarden accepteren.")
       }
-
+//Betalingswijze controleren
       let betalingswijze = ""
       function validatePayment(){
         ids = ["Banking app","Overschrijving","Visa card","PayPal"]
@@ -237,19 +240,33 @@
           errors.push("Kies een betalingswijze!")
         }
       }
-      if(errors.length !== 0){
-        let foutmeldingenP = document.querySelector("#foutmeldingenP");
+//Checken of errors leeg is
         
+      if(errors.length !== 0){
+        document.getElementById('alert').style.display = "block"
+          foutmeldingenH4.innerHTML = "Yikes errors"
           for (let i = 0; i < errors.length; i++) {
-              foutmeldingenP.innerHTML += `${errors[i]}\n`;
-          
+              foutmeldingenP.innerHTML += errors[i] + "<br>"
         }
         return false;
       }
       return true;
-      
-      
       }
+
+      
+      function validateEmail()
+      {
+        let email = document.querySelector("#email");
+      }
+
+      function checkEmptyField(veld, melding)
+        {
+            if(veld.value == "" || veld.value == "Kies een land" || veld.value == "Kies een provincie" || veld.value == 0)
+            {
+                errors.push(melding)
+            }
+        }
+        
   console.log(errors)
   console.log(juistebetaling)
   

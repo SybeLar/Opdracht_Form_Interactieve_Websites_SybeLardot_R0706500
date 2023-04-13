@@ -14,3 +14,6 @@
 .form-select-lg{
   margin-top: 0px;
 }
+#alert.hide {
+  display: none;
+}
