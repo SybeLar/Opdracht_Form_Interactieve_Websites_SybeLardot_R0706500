@@ -14,7 +14,6 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-8">
-        Container Left
         <h1>Registreer</h1>
         <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
         <!--Formulier-->
@@ -154,11 +153,14 @@
       </div>
       <!--Meldingen-->
       <div class="col-lg-4">
-        Container Right
         <div class="col-md-8" id="alert">
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger" role="alert" id="fouteldingid">
            <h4 id = "foutmeldingenH4"></h4>
             <p id="foutmeldingenP"></p>
+          </div>
+          <div class="alert alert-info" role="alert">
+            <H4 id="betalingswijzeH4">Betalingswijze</H4>
+            <p id="betalingswijzeP"></p>
           </div>
         </div>
       </div>
@@ -166,7 +168,7 @@
   </div>
 
   <script>
-    document.getElementById('alert').style.display = "none"
+    document.getElementById('fouteldingid').style.display = "none"
     let errors = []
     let juistebetaling = []
     
@@ -192,7 +194,7 @@
       checkEmptyField(provincie, "Het veld provincie is vereist.")
       checkEmptyField(passwoord, "Het wachtwoord is niet ingevuld")
       checkEmptyField(passwoord2, "Herhaal wachtwoord is niet ingevuld")
-
+      validatePayment()
 //wachtwoord controle
       if (passwoord.value.length < 7)
       {
@@ -208,6 +210,20 @@
       if (voorwaarden.checked === false) {
         errors.push("Je moet de algemene voorwaarden accepteren.")
       }
+
+      
+//Checken of errors leeg is 
+      if(errors.length !== 0){
+        document.getElementById('fouteldingid').style.display = "block"
+          foutmeldingenH4.innerHTML = "Yikes errors"
+          for (let i = 0; i < errors.length; i++) {
+              foutmeldingenP.innerHTML += errors[i] + "<br>"
+        }
+        return false;
+      }
+      return true;
+      }
+      
 //Betalingswijze controleren
       let betalingswijze = ""
       function validatePayment(){
@@ -220,30 +236,18 @@
       }
       if(betalingswijze != ""){
         juistebetaling.push("Betalingswijze is " + betalingswijze)
+        document.querySelector("#betalingswijzeP").innerHTML = "Betalingswijze is " + betalingswijze
         }
         else{
           errors.push("Kies een betalingswijze!")
         }
       }
-//Checken of errors leeg is
-        
-      if(errors.length !== 0){
-        document.getElementById('alert').style.display = "block"
-          foutmeldingenH4.innerHTML = "Yikes errors"
-          for (let i = 0; i < errors.length; i++) {
-              foutmeldingenP.innerHTML += errors[i] + "<br>"
-        }
-        return false;
-      }
-      return true;
-      }
-
-      
+  //Email controleren
       function validateEmail()
       {
         let email = document.querySelector("#email");
       }
-
+  //Lege velden controleren
       function checkEmptyField(veld, melding)
         {
             if(veld.value == "" || veld.value == "Kies een land" || veld.value == "Kies een provincie" || veld.value == 0)
