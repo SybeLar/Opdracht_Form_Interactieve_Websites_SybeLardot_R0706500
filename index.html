@@ -158,7 +158,7 @@
            <h4 id = "foutmeldingenH4"></h4>
             <p id="foutmeldingenP"></p>
           </div>
-          <div class="alert alert-info" role="alert">
+          <div class="alert alert-info" role="alert" id="betalingalertid">
             <H4 id="betalingswijzeH4">Betalingswijze</H4>
             <p id="betalingswijzeP"></p>
           </div>
@@ -169,6 +169,7 @@
 
   <script>
     document.getElementById('fouteldingid').style.display = "none"
+    document.getElementById('betalingalertid').style.display = "none"
     let errors = []
     let juistebetaling = []
     
@@ -176,7 +177,6 @@
       //foutmeldingen leegmaken
       let foutmeldingenP = document.querySelector("#foutmeldingenP")
       let foutmeldingenH4 = document.querySelector("#foutmeldingenH4")
-      //foutmeldingenP.innerHTML = ""
 
       //Controle of alles is ingevuld
       let fname = document.querySelector("#fname")
@@ -196,7 +196,7 @@
       checkEmptyField(passwoord2, "Herhaal wachtwoord is niet ingevuld")
       validatePayment()
 //wachtwoord controle
-      if (passwoord.value.length < 7)
+      if (passwoord.value.length < 7 && passwoord.value !== "")
       {
         errors.push("Het wachtwoord is niet lang genoeg.")
       }
@@ -237,6 +237,7 @@
       if(betalingswijze != ""){
         juistebetaling.push("Betalingswijze is " + betalingswijze)
         document.querySelector("#betalingswijzeP").innerHTML = "Betalingswijze is " + betalingswijze
+        document.getElementById('betalingalertid').style.display = "block"
         }
         else{
           errors.push("Kies een betalingswijze!")
