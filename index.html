@@ -17,7 +17,7 @@
         <h1>Registreer</h1>
         <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
         <!--Formulier-->
-        <form name="myForm" action="index.php" onsubmit="return CheckForm()" method="post">
+        <form name="myForm" onsubmit="return CheckForm()">
           <!--Eerste rij-->
           <div class="row">
           <div class="col-md-6">
@@ -158,6 +158,10 @@
            <h4 id = "foutmeldingenH4"></h4>
             <p id="foutmeldingenP"></p>
           </div>
+          <div class="alert alert-success" role="alert" id="succesalertid">
+            <h4>Goed gedaan!</h4>
+            <p>Aww yeah, je werd geregistreerd.</p>
+          </div>
           <div class="alert alert-info" role="alert" id="betalingalertid">
             <H4 id="betalingswijzeH4">Betalingswijze</H4>
             <p id="betalingswijzeP"></p>
@@ -170,6 +174,7 @@
   <script>
     document.getElementById('fouteldingid').style.display = "none"
     document.getElementById('betalingalertid').style.display = "none"
+    document.getElementById('succesalertid').style.display = "none"
     let errors = []
     let juistebetaling = []
     let postcode = document.querySelector("#postcode")
@@ -178,7 +183,8 @@
       //foutmeldingen leegmaken
       let foutmeldingenP = document.querySelector("#foutmeldingenP")
       let foutmeldingenH4 = document.querySelector("#foutmeldingenH4")
-
+      foutmeldingenP.innerHTML = ""
+      errors = []
       //Controle of alles is ingevuld
       let fname = document.querySelector("#fname")
       let name = document.querySelector("#name")
@@ -241,6 +247,7 @@
         juistebetaling.push("Betalingswijze is " + betalingswijze)
         document.querySelector("#betalingswijzeP").innerHTML = "Betalingswijze is " + betalingswijze
         if (errors.length === 0) {
+          document.getElementById('succesalertid').style.display = "block"
           document.getElementById('betalingalertid').style.display = "block"
         }
         
