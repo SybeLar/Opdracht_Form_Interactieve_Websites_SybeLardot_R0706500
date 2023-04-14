@@ -247,6 +247,7 @@
         juistebetaling.push("Betalingswijze is " + betalingswijze)
         document.querySelector("#betalingswijzeP").innerHTML = "Betalingswijze is " + betalingswijze
         if (errors.length === 0) {
+          document.getElementById('fouteldingid').style.display = "none"
           document.getElementById('succesalertid').style.display = "block"
           document.getElementById('betalingalertid').style.display = "block"
         }
