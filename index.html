@@ -17,7 +17,7 @@
         <h1>Registreer</h1>
         <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
         <!--Formulier-->
-        <form name="myForm">
+        <form name="myForm" onsubmit="return false">
           <!--Eerste rij-->
           <div class="row">
           <div class="col-md-6">
@@ -237,7 +237,7 @@
         }
         return false;
       }
-      return true;
+      return false;
       }
       
 //Betalingswijze controleren + succes alerts laten zien
