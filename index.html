@@ -17,7 +17,7 @@
         <h1>Registreer</h1>
         <p>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</p>
         <!--Formulier-->
-        <form name="myForm" onsubmit="return CheckForm()">
+        <form name="myForm">
           <!--Eerste rij-->
           <div class="row">
           <div class="col-md-6">
@@ -172,19 +172,26 @@
   </div>
 
   <script>
+    
+    let errors = []
+    
+    let submitKnop = document.querySelector("#submitKnop")
     document.getElementById('fouteldingid').style.display = "none"
     document.getElementById('betalingalertid').style.display = "none"
     document.getElementById('succesalertid').style.display = "none"
-    let errors = []
+    submitKnop.addEventListener("click", ValidateForm)
     let juistebetaling = []
     let postcode = document.querySelector("#postcode")
     let email = document.querySelector("#email")
-    function CheckForm(){
+
+    
+    function ValidateForm(){
       //foutmeldingen leegmaken
       let foutmeldingenP = document.querySelector("#foutmeldingenP")
       let foutmeldingenH4 = document.querySelector("#foutmeldingenH4")
       foutmeldingenP.innerHTML = ""
       errors = []
+      
       //Controle of alles is ingevuld
       let fname = document.querySelector("#fname")
       let name = document.querySelector("#name")
@@ -233,7 +240,7 @@
       return true;
       }
       
-//Betalingswijze controleren
+//Betalingswijze controleren + succes alerts laten zien
       let betalingswijze = ""
       function validatePayment(){
         ids = ["Banking app","Overschrijving","Visa card","PayPal"]
@@ -257,6 +264,7 @@
           errors.push("Kies een betalingswijze!")
         }
       }
+      
   //Email controleren
   let validRegex = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-.]+(?:\.[a-zA-Z0-9-]+)*$/;
   //https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
@@ -298,6 +306,7 @@
   
   console.log(errors)
   console.log(juistebetaling)
+  
   
   </script>
 
